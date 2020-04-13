@@ -25,7 +25,7 @@ class FaceDetector:
             graph.get_tensor_by_name('import/num_boxes:0'),
         ]
 
-        gpu_options = tf.GPUOptions(
+        gpu_options = tf.compat.v1.GPUOptions(
             per_process_gpu_memory_fraction=gpu_memory_fraction,
             visible_device_list=visible_device_list
         )
