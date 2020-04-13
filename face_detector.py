@@ -1,5 +1,6 @@
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import numpy as np
+tf.disable_v2_behavior()
 
 
 class FaceDetector:
@@ -10,8 +11,8 @@ class FaceDetector:
             gpu_memory_fraction: a float number.
             visible_device_list: a string.
         """
-        with tf.io.gfile.GFile(model_path, 'rb') as f:
-            graph_def = tf.compat.v1.GraphDef()
+        with tf.gfile.GFile(model_path, 'rb') as f:
+            graph_def = tf.GraphDef()
             graph_def.ParseFromString(f.read())
 
         graph = tf.Graph()
@@ -25,7 +26,7 @@ class FaceDetector:
             graph.get_tensor_by_name('import/num_boxes:0'),
         ]
 
-        gpu_options = tf.compat.v1.GPUOptions(
+        gpu_options = tf.GPUOptions(
             per_process_gpu_memory_fraction=gpu_memory_fraction,
             visible_device_list=visible_device_list
         )
@@ -60,4 +61,4 @@ class FaceDetector:
         scaler = np.array([h, w, h, w], dtype='float32')
         boxes = boxes * scaler
 
-        return boxes, scores
+        return boxes, scores 
