@@ -11,7 +11,7 @@ class FaceDetector:
             visible_device_list: a string.
         """
         with tf.io.gfile.GFile(model_path, 'rb') as f:
-            graph_def = tf.GraphDef()
+            graph_def = tf.compat.v1.GraphDef()
             graph_def.ParseFromString(f.read())
 
         graph = tf.Graph()
