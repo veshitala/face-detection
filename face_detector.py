@@ -10,7 +10,7 @@ class FaceDetector:
             gpu_memory_fraction: a float number.
             visible_device_list: a string.
         """
-        with tf.gfile.GFile(model_path, 'rb') as f:
+        with tf.io.gfile.GFile(model_path, 'rb') as f:
             graph_def = tf.GraphDef()
             graph_def.ParseFromString(f.read())
 
